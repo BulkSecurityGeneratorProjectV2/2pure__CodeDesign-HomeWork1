@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 /**
  * Created by Веталь on 15.10.2016.
@@ -16,7 +17,7 @@ public class TradesDownloader {
         try {
             ftpClient.connect(serverAddress, port);
             ftpClient.login(login, password);
-            File tempFile = File.createTempFile("trades", "download");
+            File tempFile = Files.createTempFile("trades", "download").toFile();
             OutputStream out = new FileOutputStream(tempFile);
             ftpClient.retrieveFile("public/prod/trades.csv", out);
             out.close();
